@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Logan's Wallpaper Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<header>
+    <h1>Logan Wallpaper Gallery</h1>
+</header>
+<body>
+    <main>
+        <!-- Admin Login Section -->
+        <div class="admin-section">
+            <h2>Admin Login</h2>
+            <form id="admin-login-form">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Log In</button>
+            </form>
+            <div id="upload-section" style="display:none;">
+                <h3>Upload Photo</h3>
+                <input type="file" id="file-upload" accept="image/*" required>
+                
+                <!-- Category Selection -->
+                <select id="category-select" required>
+                    <option value="">Select a Category</option>
+                    <option value="nature">Nature</option>
+                    <option value="sci-fi">Sci-Fi</option>
+                    <option value="movies">Movies</option>
+                    <option value="anime">Anime</option>
+                    <option value="sports">Sports</option>
+                    <option value="trading">Trading</option>
+                    <option value="retro">Retro</option>
+                    <option value="architectural">Architectural</option>
+                </select>
+                
+                <button id="upload-button">Upload Photo</button>
+                <p id="upload-status"></p>
+            </div>
+        </div>
+
+        <!-- Categories Section -->
+        <div class="categories">
+            <section id="nature">
+                <div class="category-box">Nature</div>
+                <p>Explore breathtaking wallpapers of nature.</p>
+                <a href="nature.html">View Nature Wallpapers</a>
+            </section>
+            <section id="sci-fi">
+                <div class="category-box">Sci-Fi</div>
+                <p>A collection of futuristic and imaginative wallpapers.</p>
+                <a href="sci-fi.html">View Sci-Fi Wallpapers</a>
+            </section>
+            <section id="movies">
+                <div class="category-box">Movies</div>
+                <p>Check out wallpapers from your favorite movies.</p>
+                <a href="movies.html">View Movie Wallpapers</a>
+            </section>
+            <section id="anime">
+                <div class="category-box">Anime</div>
+                <p>Dive into the world of anime with stunning wallpapers.</p>
+                <a href="anime.html">View Anime Wallpapers</a>
+            </section>
+            <section id="sports">
+                <div class="category-box">Sports</div>
+                <p>Discover wallpapers of your favorite sports teams.</p>
+                <a href="sports.html">View Sports Wallpapers</a>
+            </section>
+            <section id="trading">
+                <div class="category-box">Trading</div>
+                <p>Explore dynamic wallpapers related to trading.</p>
+                <a href="trading.html">View Trading Wallpapers</a>
+            </section>
+            <section id="retro">
+                <div class="category-box">Retro</div>
+                <p>Enjoy nostalgic retro wallpapers.</p>
+                <a href="retro.html">View Retro Wallpapers</a>
+            </section>
+            <section id="architectural">
+                <div class="category-box">Architectural</div>
+                <p>Admire stunning architectural wallpapers.</p>
+                <a href="architectural.html">View Architectural Wallpapers</a>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="profile">
+            <img src="kibry.jpg" alt="Profile Photo" class="profile-photo">
+            <a href="https://wa.me/254789504437" target="_blank">WhatsApp</a>
+        </div>
+        <p>&copy; 2023 Logan Wallpaper Gallery</p>
+    </footer>
+
+    <script>
+        // Simple admin login functionality
+        const adminUsername = "Kibry001";
+        const adminPassword = "110853@#";
+
+        document.getElementById("admin-login-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username === adminUsername && password === adminPassword) {
+                document.getElementById("upload-section").style.display = "block";
+                alert("Login successful! You can now upload photos.");
+            } else {
+                alert("Invalid username or password.");
+            }
+        });
+
+        // Upload functionality
+        document.getElementById("upload-button").addEventListener("click", function() {
+            const fileInput = document.getElementById("file-upload");
+            const categorySelect = document.getElementById("category-select");
+            const uploadStatus = document.getElementById("upload-status");
+
+            if (fileInput.files.length > 0 && categorySelect.value) {
+                const formData = new FormData();
+                formData.append('image', fileInput.files[0]); // Append the image file
+                formData.append('category', categorySelect.value); // Append the selected category
+
+                fetch('/upload', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    uploadStatus.innerHTML = `Photo "${fileInput.files[0].name}" uploaded successfully to ${categorySelect.value} category!
+                    <a href="${data.url}">${fileInput.files[0].name}</a>`;
+                    fileInput.value = ""; // Clear the file input
+                    categorySelect.value = ""; // Reset category
+                })
+                .catch(error => {
+                    uploadStatus.innerText = "Error uploading the file.";
+                    console.error('Upload error:', error); // Log the error to the console for debugging
+                });
+            } else {
+                uploadStatus.innerText = "Please select a file and a category to upload.";
+            }
+        });
+    </script>
+</body>
+</html>

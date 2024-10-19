@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #003366; /* Light blue background */
+}
+
+header {
+    background-color: #A020F0; /* Dark blue header */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+.admin-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #ffffff; /* White background for admin section */
+    border: 1px solid #A020F0; /* Border color matching header */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for effect */
+}
+
+.admin-section h2 {
+    margin: 0 0 15px;
+}
+
+.admin-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-section input[type="text"],
+.admin-section input[type="password"],
+.admin-section input[type="file"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.admin-section button {
+    padding: 10px;
+    background-color: #7ED3D6; /* Dark blue button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.admin-section button:hover {
+    background-color: #005599; /* Slightly lighter blue on hover */
+}
+
+.categories {
+    margin-top: 20px;
+    padding: 10px; /* Adding some padding around the categories */
+    border: 2px solid #003366; /* Frame color */
+    border-radius: 10px; /* Rounded corners for the frame */
+    background-color: #87CEEB; /* White background for the categories section */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for effect */
+}
+
+.categories h2 {
+    margin: 20px 0; /* Added margin for category headers */
+}
+
+.gallery img {
+    max-width: 100%;
+    height: auto;
+}
+
+section {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.category-box {
+    display: inline-block;
+    background-color: #fff;
+    border: 1px solid #A020F0; 
+    border-radius: 5px;
+    padding: 15px;
+    margin: 5px;
+    width: calc(100% / 4 - 20px); /* Adjust category box width */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.category-box:hover {
+    background-color: #f0f0f0; /* Highlight on hover */
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #A020F0; /* Dark blue footer */
+    color: white;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align to the left */
+    margin: 10px 0; /* Add space above the copyright */
+}
+
+.profile-photo {
+    width: 50px; /* Adjust the size of profile photo */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Make it circular */
+    margin-right: 10px; /* Space between photo and links */
+}
